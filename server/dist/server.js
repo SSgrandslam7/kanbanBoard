@@ -1,7 +1,6 @@
 const forceDatabaseRefresh = false;
 import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
-console.log("JWT_SECRET_KEY =", process.env.JWT_SECRET_KEY);
 import express from 'express';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
