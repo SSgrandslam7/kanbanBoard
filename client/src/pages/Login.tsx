@@ -9,6 +9,8 @@ const Login = () => {
     password: ''
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
@@ -19,11 +21,13 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setError('');
     try {
       const token = await login(loginData);
       Auth.login(token);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to login', err);
+      setError(err.message || 'Login failes');
     }
   };
 
@@ -31,6 +35,9 @@ const Login = () => {
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Login</h1>
+
+        {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
+        
         <label >Username</label>
         <input 
           type='text'
