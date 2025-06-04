@@ -9,26 +9,24 @@ export const login = async (req: Request, res: Response) => {
 
   try{
     const user = await User.findOne({ where: { username } });
-
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
     const isValid = await bcrypt.compare(password, user.password);
-
     if (!isValid) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const secret =  process.env.JWT_SECRET;
-    if (!secret) throw new Error('JWT secret is missing');
+    const secret =  process.env.JWT_SECRET_KEY;
+    if (!secret) throw new Error('JWT secret key is missing');
 
     const token = jwt.sign({ username: user.username }, secret, { expiresIn: '1h' });
 
-    res.json({ token });
+    return res.json({ token });
   } catch (err) {
     console.error('Login error:', err);
-    res.status(500).json({ message: 'Server error during login' });
+    return res.status(500).json({ message: 'Server error during login' });
   }
 };
 
