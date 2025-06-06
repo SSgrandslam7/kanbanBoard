@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { User } from '../models/user.js';
 
 export const seedUsers = async () => {

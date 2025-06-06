@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { Ticket } from '../models/ticket.js';
 
 export const seedTickets = async () => {

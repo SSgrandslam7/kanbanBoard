@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { seedUsers } from './user-seeds.js';
 import { seedTickets } from './ticket-seeds.js';
-import { sequelize } from '../models/index.js';
+import sequelize from '../models/index.js';
 
 const seedAll = async (): Promise<void> => {
   try {
